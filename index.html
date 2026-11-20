@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MMR / LMR Bonus Tolerance Lab · DIN EN ISO 2692</title>
+  <meta name="description" content="Interactive 1967 book-plate lab for DIN EN ISO 2692: Maximum Material Requirement (Ⓜ), Virtual Condition (MMVS), +57% cylindrical Ø vs ± square tolerance area, and Least Material Requirement (Ⓛ)." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23efe6d3%22 stroke=%22%23181715%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22%23faf5e8%22 stroke=%22%23d94426%22 stroke-width=%226%22/><text x=%2250%22 y=%2263%22 font-family=%22Inter,Arial,sans-serif%22 font-size=%2240%22 font-weight=%22800%22 fill=%22%23181715%22 text-anchor=%22middle%22>M</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top Header (Pure 1967 Technical Book-Plate Aesthetic) -->
+    <header id="app-header">
+      <div class="header-left">
+        <a href="https://xallace.github.io/#technical-design" class="pill-btn back-chip" title="Back to Portfolio Hub">← Portfolio</a>
+        <div class="brand-badge-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9" stroke="#d94426" stroke-width="2" />
+            <text x="12" y="16" font-family="Outfit, Inter, sans-serif" font-size="11" font-weight="800" fill="currentColor" stroke="none" text-anchor="middle">M</text>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>MMR / LMR LAB <span class="sub-tag">ISO 2692</span></h1>
+          <p class="source-ref">Bonus Tolerance (Ⓜ / Ⓛ / Ⓡ) · Virtual Condition MMVS · +57% Ø vs. ± Zone</p>
+        </div>
+      </div>
+
+      <nav class="main-tabs" role="tablist" aria-label="Laboratory Modules">
+        <button class="tab-btn active" data-tab="mmr" role="tab" aria-selected="true" id="tab-mmr">1 · MMR Ⓜ &amp; Gauge</button>
+        <button class="tab-btn" data-tab="zones" role="tab" aria-selected="false" id="tab-zones">2 · Ø vs. ± (+57%)</button>
+        <button class="tab-btn" data-tab="lmr" role="tab" aria-selected="false" id="tab-lmr">3 · LMR Ⓛ (Min Wall)</button>
+        <button class="tab-btn" data-tab="rules" role="tab" aria-selected="false" id="tab-rules">4 · ISO 2692 Rules</button>
+      </nav>
+
+      <div class="header-right">
+        <button id="btn-tour" class="pill-btn accent"><span>▶</span> Guided Tour</button>
+      </div>
+    </header>
+
+    <!-- Guided Tour Banner -->
+    <section id="tour-banner" class="tour-banner hidden" aria-live="polite">
+      <div class="tour-left">
+        <span class="tour-step-badge" id="tour-step-badge">Stop 1 / 4</span>
+        <div>
+          <h2 class="tour-title" id="tour-title">Tour Stop</h2>
+          <p class="tour-body" id="tour-body"></p>
+        </div>
+      </div>
+      <div class="tour-controls">
+        <button id="btn-tour-prev" class="pill-btn">← Prev</button>
+        <button id="btn-tour-next" class="pill-btn vermilion">Next →</button>
+        <button id="btn-tour-close" class="pill-btn" title="Close guided tour">✕</button>
+      </div>
+    </section>
+
+    <main class="workspace">
+
+      <!-- ================================================================
+           TAB 1: MMR Ⓜ, BONUS TOLERANCE & MMVS FUNCTIONAL GAUGE
+           ================================================================ -->
+      <section class="view active" id="view-mmr">
+        <div class="split-layout">
+          <div class="stage-col">
+            <div class="verdict-strip">
+              <div class="verdict-cell" id="mmr-v-rfs">
+                <span class="v-kicker">WITHOUT Ⓜ (RFS ONLY)</span>
+                <div class="v-value" id="mmr-rfs-val">REJECT</div>
+                <span class="v-sub" id="mmr-rfs-sub">Ø0.388 &gt; Ø0.200 fixed</span>
+              </div>
+              <div class="verdict-cell" id="mmr-v-mmr">
+                <span class="v-kicker">WITH Ⓜ (BONUS ACTIVE)</span>
+                <div class="v-value" id="mmr-mmr-val">PASS</div>
+                <span class="v-sub" id="mmr-mmr-sub">Ø0.388 ≤ Ø0.480 (+0.280 bonus)</span>
+              </div>
+              <div class="verdict-cell" id="mmr-v-gauge">
+                <span class="v-kicker">MMVS FUNCTIONAL GAUGE</span>
+                <div class="v-value" id="mmr-gauge-val">SCRAP SAVED!</div>
+                <span class="v-sub" id="mmr-gauge-sub">Ø10.00 bolt passes freely</span>
+              </div>
+            </div>
+
+            <div class="plate-card">
+              <div class="plate-card-head">
+                <span class="plate-fig-label">PLATE I · FUNCTIONAL GO-GAUGE (MMVS) &amp; EXPANDING Ⓜ POSITION ZONE</span>
+                <div class="plate-head-controls">
+                  <button id="btn-feat-hole" class="mini-btn vermilion active">Clearance Hole</button>
+                  <button id="btn-feat-pin" class="mini-btn">External Pin</button>
+                </div>
+              </div>
+              <canvas id="canvas-mmr" class="canvas-main"></canvas>
+            </div>
+
+            <div class="plate-card compact">
+              <div class="plate-card-head">
+                <span class="plate-fig-label">FIG. 1B · ISO 2692 BONUS TOLERANCE RAMP (ACTUAL SIZE VS. ALLOWED POSITION Ø)</span>
+                <span class="plate-fig-note">Dot inside green trapezoid = guaranteed assembly</span>
+              </div>
+              <canvas id="canvas-bonus" class="canvas-strip"></canvas>
+            </div>
+          </div>
+
+          <aside class="inspector-col">
+            <div class="panel-card">
+              <div class="envelope-master active-m" id="mmr-master-box">
+                <div class="env-top-row">
+                  <div>
+                    <span class="env-kicker">FEATURE CONTROL FRAME</span>
+                    <div class="env-callout" id="mmr-fcf-display">| ⌖ | Ø0.20 Ⓜ | A | B | C |</div>
+                  </div>
+                  <button id="btn-toggle-m" class="e-toggle-btn" aria-pressed="true">
+                    <span class="e-circle">M</span>
+                    <span id="ui-btn-m-label">Ⓜ MMR Active</span>
+                  </button>
+                </div>
+                <p class="env-explain" id="mmr-explain"></p>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">CLASSIC SHOP-FLOOR SCENARIOS</div>
+                <div class="preset-grid" id="mmr-presets">
+                  <button class="preset-btn active" data-mpre="scrap-saved">Scrap Saved by Ⓜ</button>
+                  <button class="preset-btn" data-mpre="zero-mmc">Zero-at-MMC (Ø0 Ⓜ)</button>
+                  <button class="preset-btn" data-mpre="at-mms">At MMS (Zero Bonus)</button>
+                  <button class="preset-btn" data-mpre="reciprocity">Reciprocity (Ⓜ Ⓡ)</button>
+                  <button class="preset-btn" data-mpre="pin-fit">External Pin (Stud)</button>
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">FEATURE SIZE, POSITION &amp; MODIFIERS (mm)</div>
+
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="sl-dact" id="lbl-dact">Actual Hole Diameter d_act</label>
+                    <strong id="val-dact">Ø10.48 mm</strong>
+                  </div>
+                  <input id="sl-dact" type="range" min="9.95" max="10.65" step="0.01" value="10.48" />
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="sl-tpos">Stated Position Tolerance Øt_pos</label>
+                    <strong id="val-tpos">Ø0.20 mm</strong>
+                  </div>
+                  <input id="sl-tpos" type="range" min="0.00" max="0.40" step="0.02" value="0.20" />
+                </div>
+
+                <div class="slider-row-dual">
+                  <div class="slider-item">
+                    <div class="slider-head"><label for="sl-dx">Center Offset Δx</label><strong id="val-dx">+0.16 mm</strong></div>
+                    <input id="sl-dx" type="range" min="-0.35" max="0.35" step="0.01" value="0.16" />
+                  </div>
+                  <div class="slider-item">
+                    <div class="slider-head"><label for="sl-dy">Center Offset Δy</label><strong id="val-dy">+0.11 mm</strong></div>
+                    <input id="sl-dy" type="range" min="-0.35" max="0.35" step="0.01" value="0.11" />
+                  </div>
+                </div>
+
+                <label class="inline-check" style="margin-top:4px;">
+                  <input type="checkbox" id="chk-rpr" />
+                  <span>Enable Reciprocity Requirement <strong>Ⓡ</strong> (trades unused position tolerance back into size down to MMVS)</span>
+                </label>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">EXACT DIN EN ISO 2692 TELEMETRY</div>
+                <table class="spec-table" id="mmr-telemetry"></table>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 2: CYLINDRICAL Ø VS. ± COORDINATE SQUARE (+57.08% AREA)
+           ================================================================ -->
+      <section class="view" id="view-zones">
+        <div class="split-layout">
+          <div class="stage-col">
+            <div class="verdict-strip">
+              <div class="verdict-cell info">
+                <span class="v-kicker">FREE AREA GAIN (Ø VS. ±)</span>
+                <div class="v-value">+57.08%</div>
+                <span class="v-sub">Exact (π/2 − 1) at same corner clearance</span>
+              </div>
+              <div class="verdict-cell" id="z-v-sq">
+                <span class="v-kicker">± SQUARE BATCH YIELD</span>
+                <div class="v-value" id="z-sq-yield">75.4%</div>
+                <span class="v-sub" id="z-sq-sub">181 / 240 parts pass ±0.10</span>
+              </div>
+              <div class="verdict-cell pass" id="z-v-ci">
+                <span class="v-kicker">⌖ Ø CYLINDER BATCH YIELD</span>
+                <div class="v-value" id="z-ci-yield">88.3%</div>
+                <span class="v-sub" id="z-ci-sub">+31 valid parts rescued in bonus lobes!</span>
+              </div>
+            </div>
+
+            <div class="plate-card">
+              <div class="plate-card-head">
+                <span class="plate-fig-label">PLATE II · CIRCUMSCRIBED CYLINDRICAL Ø ZONE VS. LEGACY ± SQUARE (240-PART BATCH)</span>
+                <span class="plate-fig-note">Drag test dot into the blue crescent lobes</span>
+              </div>
+              <canvas id="canvas-zones" class="canvas-cross"></canvas>
+            </div>
+          </div>
+
+          <aside class="inspector-col">
+            <div class="panel-card">
+              <h2 class="plate-heading">Why ⌖ Ø Beats ± Coordinates</h2>
+              <p class="plate-prose">
+                A legacy <code>±0.10 mm</code> square tolerance already permits a diagonal corner error of <code>r = 0.10 × √2 = 0.1414 mm</code>. Because bolts and holes are round, any offset within radius <code>0.1414 mm</code> (<code>Ø0.283 mm</code>) assembles identically! Switching from <code>±</code> to cylindrical <code>⌖ Ø</code> unlocks <strong>+57.08% more tolerance area</strong> for free.
+              </p>
+
+              <div class="control-section">
+                <div class="section-label">ZONE &amp; PROCESS PARAMETERS</div>
+                <div class="slider-item">
+                  <div class="slider-head"><label for="sl-zside">Legacy Square Half-Side (±a)</label><strong id="val-zside">±0.10 mm</strong></div>
+                  <input id="sl-zside" type="range" min="0.05" max="0.25" step="0.01" value="0.10" />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-head"><label for="sl-zsig">CNC Process Scatter (1σ)</label><strong id="val-zsig">0.068 mm</strong></div>
+                  <input id="sl-zsig" type="range" min="0.030" max="0.140" step="0.004" value="0.068" />
+                </div>
+                <div class="slider-row-dual">
+                  <div class="slider-item">
+                    <div class="slider-head"><label for="sl-zptx">Test Part Δx</label><strong id="val-zptx">+0.115 mm</strong></div>
+                    <input id="sl-zptx" type="range" min="-0.22" max="0.22" step="0.005" value="0.115" />
+                  </div>
+                  <div class="slider-item">
+                    <div class="slider-head"><label for="sl-zpty">Test Part Δy</label><strong id="val-zpty">+0.035 mm</strong></div>
+                    <input id="sl-zpty" type="range" min="-0.22" max="0.22" step="0.005" value="0.035" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">EXACT AREA &amp; YIELD COMPARISON</div>
+                <table class="spec-table" id="zones-telemetry"></table>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 3: LMR Ⓛ LEAST MATERIAL REQUIREMENT (MINIMUM WALL THICKNESS)
+           ================================================================ -->
+      <section class="view" id="view-lmr">
+        <div class="split-layout">
+          <div class="stage-col">
+            <div class="verdict-strip">
+              <div class="verdict-cell" id="lmr-v-wall">
+                <span class="v-kicker">ACTUAL MIN WALL THICKNESS</span>
+                <div class="v-value" id="lmr-wall-val">4.61 mm</div>
+                <span class="v-sub" id="lmr-wall-sub">Guaranteed floor ≥ 4.50 mm</span>
+              </div>
+              <div class="verdict-cell" id="lmr-v-pos">
+                <span class="v-kicker">ALLOWED POSITION (WITH Ⓛ)</span>
+                <div class="v-value" id="lmr-allow-val">Ø0.700</div>
+                <span class="v-sub" id="lmr-allow-sub">t = 0.400 + 0.300 Ⓛ bonus</span>
+              </div>
+              <div class="verdict-cell" id="lmr-v-verdict">
+                <span class="v-kicker">LMR Ⓛ VERDICT</span>
+                <div class="v-value" id="lmr-verdict-val">PASS</div>
+                <span class="v-sub" id="lmr-verdict-sub">Wall protected &amp; bonus used</span>
+              </div>
+            </div>
+
+            <div class="plate-card">
+              <div class="plate-card-head">
+                <span class="plate-fig-label">PLATE III · LEAST MATERIAL REQUIREMENT Ⓛ — MINIMUM BOSS WALL PROTECTION</span>
+                <label class="inline-check">
+                  <input type="checkbox" id="chk-use-lmr" checked />
+                  <span>Enable Ⓛ Modifier</span>
+                </label>
+              </div>
+              <canvas id="canvas-lmr" class="canvas-cross"></canvas>
+            </div>
+          </div>
+
+          <aside class="inspector-col">
+            <div class="panel-card">
+              <h2 class="plate-heading">LMR Ⓛ · Protecting Thin Walls</h2>
+              <p class="plate-prose">
+                While <code>Ⓜ</code> protects mating assembly clearance, <strong>Least Material Requirement <code>Ⓛ</code></strong> protects <strong>minimum remaining material</strong> — such as wall thickness around a hydraulic port or cast boss. When the hole is drilled smaller than its maximum size (<code>LMS = Ø10.40</code>), extra wall thickness converts into free bonus position tolerance while guaranteeing <code>w_min ≥ (D_min − LMVS) / 2</code>.
+              </p>
+
+              <div class="control-section">
+                <div class="section-label">BOSS &amp; BORE PARAMETERS (mm)</div>
+                <div class="slider-item">
+                  <div class="slider-head"><label for="sl-lh">Actual Bore Diameter (10.00..10.40)</label><strong id="val-lh">Ø10.10 mm</strong></div>
+                  <input id="sl-lh" type="range" min="10.00" max="10.40" step="0.02" value="10.10" />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-head"><label for="sl-lb">Actual Outer Boss Ø (19.80..20.20)</label><strong id="val-lb">Ø19.90 mm</strong></div>
+                  <input id="sl-lb" type="range" min="19.80" max="20.20" step="0.02" value="19.90" />
+                </div>
+                <div class="slider-row-dual">
+                  <div class="slider-item">
+                    <div class="slider-head"><label for="sl-ldx">Bore Offset Δx</label><strong id="val-ldx">+0.24 mm</strong></div>
+                    <input id="sl-ldx" type="range" min="-0.45" max="0.45" step="0.02" value="0.24" />
+                  </div>
+                  <div class="slider-item">
+                    <div class="slider-head"><label for="sl-ldy">Bore Offset Δy</label><strong id="val-ldy">+0.16 mm</strong></div>
+                    <input id="sl-ldy" type="range" min="-0.45" max="0.45" step="0.02" value="0.16" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">LMR WALL-THICKNESS TELEMETRY</div>
+                <table class="spec-table" id="lmr-telemetry"></table>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 4: ISO 2692 RULES & FORMULA REFERENCE SHEET
+           ================================================================ -->
+      <section class="view" id="view-rules">
+        <div class="standards-sheet-page">
+          <div class="sheet-folio-header">
+            <span>PLATE IV · DIN EN ISO 2692 SPECIFICATION RULES &amp; FORMULAS</span>
+            <span>MMR Ⓜ · LMR Ⓛ · RECIPROCITY Ⓡ · VIRTUAL CONDITION</span>
+          </div>
+
+          <h2 class="plate-heading large">When to Use Ⓜ, Ⓛ, or No Modifier (RFS)</h2>
+          <p class="sheet-subtitle">Bonus tolerance is one of the strongest cost-reduction tools in ISO GPS — when applied to the right functional features.</p>
+
+          <div class="rules-spread">
+            <div class="rule-col">
+              <div class="rule-badge good">USE Ⓜ OR Ⓛ HERE</div>
+              <ul class="plate-list">
+                <li><strong>Clearance bolt patterns &amp; locating slots (<code>Ⓜ</code>):</strong> Larger clearance holes freely absorb more position error while guaranteeing fastener assembly via fixed Go-Gauge <code>MMVS</code>.</li>
+                <li><strong>Zero-Tolerance-at-MMC (<code>⌖ Ø0 Ⓜ</code>):</strong> Gives manufacturing maximum continuous freedom across size + position without arbitrary split limits.</li>
+                <li><strong>Thin-wall bosses &amp; hydraulic ports (<code>Ⓛ</code>):</strong> Protects burst strength and minimum wall thickness when holes are drilled smaller than <code>LMS</code>.</li>
+              </ul>
+            </div>
+            <div class="rule-col is-warn">
+              <div class="rule-badge warn">DO NOT USE Ⓜ HERE (KEEP RFS)</div>
+              <ul class="plate-list">
+                <li><strong>Bearing bores &amp; press-fit dowel holes:</strong> Extra radial play as size grows is NOT acceptable — axis position must remain tightly centered regardless of feature size.</li>
+                <li><strong>Gear center distances &amp; optical alignments:</strong> Backlash and focus depend strictly on center location, not clearance-hole departure.</li>
+                <li><strong>Non-size features (flat planes, single surfaces):</strong> <code>Ⓜ</code> and <code>Ⓛ</code> are legally invalid on features without an opposing size dimension!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sheet-divider"></div>
+
+          <h3 class="plate-subhead">Core DIN EN ISO 2692 Equations</h3>
+          <table class="ref-matrix">
+            <thead>
+              <tr>
+                <th>Quantity</th>
+                <th>Internal Feature (Hole / Slot)</th>
+                <th>External Feature (Pin / Shaft)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MMS</strong> (Maximum Material Size)</td>
+                <td><code>d_min</code> (smallest hole = most metal)</td>
+                <td><code>d_max</code> (largest pin = most metal)</td>
+              </tr>
+              <tr>
+                <td><strong>LMS</strong> (Least Material Size)</td>
+                <td><code>d_max</code> (largest hole = least metal)</td>
+                <td><code>d_min</code> (smallest pin = least metal)</td>
+              </tr>
+              <tr>
+                <td><strong>MMVS</strong> (Go-Gauge Virtual Size)</td>
+                <td><code>MMS − t_pos</code></td>
+                <td><code>MMS + t_pos</code></td>
+              </tr>
+              <tr>
+                <td><strong>LMVS</strong> (Least Material Virtual Size)</td>
+                <td><code>LMS + t_pos</code></td>
+                <td><code>LMS − t_pos</code></td>
+              </tr>
+              <tr>
+                <td><strong>Bonus Tolerance under Ⓜ</strong></td>
+                <td><code>d_act − d_min</code></td>
+                <td><code>d_max − d_act</code></td>
+              </tr>
+              <tr>
+                <td><strong>Reciprocity <code>Ⓜ Ⓡ</code></strong></td>
+                <td colspan="2">Permits actual size to cross <code>MMS</code> up to <code>MMVS</code> if geometric error stays below <code>t_pos</code> (so total envelope still clears <code>MMVS</code>).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="sources-footer-box">
+            <strong>Standards &amp; Technical References:</strong>
+            DIN EN ISO 2692:2021 (Maximum Material Requirement MMR, Least Material Requirement LMR, Reciprocity Requirement RPR) ·
+            DIN EN ISO 1101 · DIN EN ISO 8015 ·
+            Schütte &amp; Jorden, <em>Form- und Lagetoleranzen</em> (Ch. 04 Toleranzverknüpfungen) ·
+            Hoischen, <em>Technisches Zeichnen</em> (34th ed., Ch. 06).
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <span class="footer-note">Verified analytically against DIN EN ISO 2692 MMR/LMR/MMVS equations (14 automated checks · zero external dependencies)</span>
+      <span class="footer-meta">MMR / LMR Lab · <a href="https://xallace.github.io" target="_blank" rel="noopener noreferrer">xallace.github.io</a></span>
+    </footer>
+  </div>
+
+  <script src="mmr-math.js"></script>
+  <script src="draw.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
