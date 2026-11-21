@@ -9,21 +9,21 @@
   'use strict';
 
   const C = {
-    paper: '#faf5e8',
-    warm: '#f3ebda',
-    grid: '#e8dec9',
-    ink: '#181715',
-    muted: '#5c564c',
-    rule: '#cfc5b2',
-    ruleSoft: '#e4dac5',
-    green: '#047857',
-    greenFill: 'rgba(4, 120, 87, 0.14)',
-    blue: '#0369a1',
-    blueFill: 'rgba(3, 105, 161, 0.13)',
-    amber: '#b45309',
-    amberFill: 'rgba(180, 83, 9, 0.14)',
-    red: '#d94426',
-    redFill: 'rgba(217, 68, 38, 0.14)'
+    paper: '#0a101a',
+    warm: '#0e141e',
+    grid: '#151b26',
+    ink: '#e9edf5',
+    muted: '#95a0b4',
+    rule: '#29303c',
+    ruleSoft: '#181e29',
+    green: '#58b691',
+    greenFill: 'rgba(88, 182, 145, 0.14)',
+    blue: '#56a8e4',
+    blueFill: 'rgba(86, 168, 228, 0.13)',
+    amber: '#ed864b',
+    amberFill: 'rgba(237, 134, 75, 0.14)',
+    red: '#ff7d61',
+    redFill: 'rgba(255, 125, 97, 0.14)'
   };
 
   function setupCanvas(canvas) {
@@ -101,7 +101,7 @@
 
     // Crosshairs at TED (0,0)
     ctx.save();
-    ctx.strokeStyle = 'rgba(24, 23, 21, 0.24)';
+    ctx.strokeStyle = 'rgba(233, 237, 245, 0.24)';
     ctx.lineWidth = 0.9;
     ctx.setLineDash([10, 4, 2, 4]);
     ctx.beginPath();
@@ -161,7 +161,7 @@
       // Actual Pin shifted by dx, dy
       ctx.beginPath();
       ctx.arc(featCx, featCy, rAct, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(232, 222, 200, 0.92)';
+      ctx.fillStyle = 'rgba(21, 27, 38, 0.92)';
       ctx.fill();
       ctx.strokeStyle = sol.activePass ? C.ink : C.red;
       ctx.lineWidth = 2.1;
@@ -238,7 +238,7 @@
     const rRfsPx = Math.max(2, (sol.tPos * 0.5) * zScale);
     ctx.beginPath();
     ctx.arc(rightCx, cy, rRfsPx, 0, Math.PI * 2);
-    ctx.fillStyle = sol.useMMR ? 'rgba(3, 105, 161, 0.12)' : C.amberFill;
+    ctx.fillStyle = sol.useMMR ? 'rgba(86, 168, 228, 0.12)' : C.amberFill;
     ctx.fill();
     ctx.strokeStyle = sol.useMMR ? C.blue : C.amber;
     ctx.lineWidth = 1.7;
@@ -314,7 +314,7 @@
       ctx.lineTo(xOf(endX), yOf(0));
     }
     ctx.closePath();
-    ctx.fillStyle = sol.useMMR ? C.greenFill : 'rgba(24,23,21,0.04)';
+    ctx.fillStyle = sol.useMMR ? C.greenFill : 'rgba(233, 237, 245,0.04)';
     ctx.fill();
     ctx.strokeStyle = sol.useMMR ? C.green : C.rule;
     ctx.lineWidth = 1.6;
@@ -334,7 +334,7 @@
     const px = xOf(sol.dAct);
     const py = yOf(Math.min(yMax, sol.posDiaErr));
     ctx.save();
-    ctx.strokeStyle = 'rgba(24,23,21,0.3)';
+    ctx.strokeStyle = 'rgba(233, 237, 245,0.3)';
     ctx.lineWidth = 0.9;
     ctx.setLineDash([3, 3]);
     ctx.beginPath();
@@ -434,10 +434,10 @@
       const py = cy - p.y * scale;
       if (Math.hypot(px - cx, py - cy) > rPx + 42) return;
       ctx.fillStyle = p.inSq
-        ? 'rgba(4, 120, 87, 0.55)'
+        ? 'rgba(88, 182, 145, 0.55)'
         : p.inBonus
-          ? 'rgba(3, 105, 161, 0.90)'
-          : 'rgba(217, 68, 38, 0.42)';
+          ? 'rgba(86, 168, 228, 0.90)'
+          : 'rgba(255, 125, 97, 0.42)';
       ctx.beginPath();
       ctx.arc(px, py, p.inBonus ? 3.2 : 2.3, 0, Math.PI * 2);
       ctx.fill();
@@ -520,7 +520,7 @@
     // Solid Circular Boss
     ctx.beginPath();
     ctx.arc(cx, cy, rBoss, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(232, 222, 200, 0.92)';
+    ctx.fillStyle = 'rgba(21, 27, 38, 0.92)';
     ctx.fill();
     ctx.strokeStyle = C.ink;
     ctx.lineWidth = 2;
