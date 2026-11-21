@@ -179,14 +179,14 @@
 
     // Left panel labels
     ctx.save();
-    ctx.font = '700 10.5px "JetBrains Mono", monospace';
+    ctx.font = '700 10.5px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.ink;
     ctx.textAlign = 'center';
     ctx.fillText(
       sol.isHole ? `HOLE Ø${sol.dAct.toFixed(2)} + GO-GAUGE PIN Ø${sol.mmvs.toFixed(2)}` : `PIN Ø${sol.dAct.toFixed(2)} + GO-GAUGE RING Ø${sol.mmvs.toFixed(2)}`,
       leftCx, 34
     );
-    ctx.font = '600 9.5px "JetBrains Mono", monospace';
+    ctx.font = '600 9.5px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = sol.gaugeFits ? C.blue : C.red;
     ctx.fillText(
       sol.gaugeFits
@@ -257,14 +257,14 @@
     ctx.stroke();
 
     // Right panel labels
-    ctx.font = '700 10.5px "JetBrains Mono", monospace';
+    ctx.font = '700 10.5px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.ink;
     ctx.textAlign = 'center';
     ctx.fillText(
       sol.useMMR ? `ALLOWED ZONE Ø${sol.allowedPosDia.toFixed(3)} (t + BONUS)` : `RFS ZONE Ø${sol.tPos.toFixed(3)} (NO BONUS)`,
       rightCx, 34
     );
-    ctx.font = '600 9.5px "JetBrains Mono", monospace';
+    ctx.font = '600 9.5px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = sol.activePass ? C.green : C.red;
     ctx.fillText(
       `Actual Øe = ${sol.posDiaErr.toFixed(3)} mm · Drag dot to move center`,
@@ -358,7 +358,7 @@
     ctx.strokeRect(pad.l, pad.t, pw, ph);
 
     ctx.fillStyle = C.muted;
-    ctx.font = '500 9px "JetBrains Mono", monospace';
+    ctx.font = '500 9px "Iosevka Charon Mono", monospace';
     ctx.textAlign = 'right';
     ctx.fillText(`Ø${yMax.toFixed(2)}`, pad.l - 6, pad.t + 6);
     ctx.fillText(`Ø${sol.tPos.toFixed(2)}`, pad.l - 6, yOf(sol.tPos) + 3);
@@ -456,7 +456,7 @@
     ctx.stroke();
 
     // Bonus Lobe Annotation
-    ctx.font = '700 10px "JetBrains Mono", monospace';
+    ctx.font = '700 10px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.blue;
     ctx.textAlign = 'center';
     ctx.fillText('+57.1% BONUS AREA', cx, cy - halfPx - (rPx - halfPx) * 0.45 + 3);
@@ -556,7 +556,7 @@
     // Wall Label
     const mx = (wInX + wOutX) * 0.5 + Math.cos(dirAng) * 34;
     const my = (wInY + wOutY) * 0.5 + Math.sin(dirAng) * 26;
-    ctx.font = '700 10px "JetBrains Mono", monospace';
+    ctx.font = '700 10px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = wCol;
     ctx.textAlign = 'center';
     ctx.fillText(`w_min = ${lSol.actualMinWall.toFixed(2)} mm`, Math.max(85, Math.min(w - 85, mx)), Math.max(66, Math.min(h - 32, my)));
@@ -564,9 +564,9 @@
     // Header text
     ctx.textAlign = 'left';
     ctx.fillStyle = C.ink;
-    ctx.font = '700 11.5px "JetBrains Mono", monospace';
+    ctx.font = '700 11.5px "Iosevka Charon Mono", monospace';
     ctx.fillText(`BOSS Ø${lSol.dBossAct.toFixed(2)} · HOLE Ø${lSol.dHoleAct.toFixed(2)} · | ⌖ | Ø${lSol.tPos.toFixed(2)}${lSol.useLMR ? ' Ⓛ' : ''} | A |`, 22, 32);
-    ctx.font = '500 10px "Inter", sans-serif';
+    ctx.font = '500 10px "Iosevka Charon", sans-serif';
     ctx.fillStyle = C.muted;
     ctx.fillText(`LMVS Boundary = Ø${lSol.lmvsHole.toFixed(2)} mm · Guaranteed Min. Wall = ${lSol.guaranteedMinWall.toFixed(2)} mm`, 22, 48);
     ctx.restore();

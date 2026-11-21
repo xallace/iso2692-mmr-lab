@@ -26,9 +26,9 @@
   --amber-bg: rgba(237, 134, 75, 0.10);
   --blue-bg: rgba(86, 168, 228, 0.09);
 
-  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Outfit', 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', Consolas, monospace;
+  --font-ui: var(--xt-text);
+  --font-display: var(--xt-title);
+  --font-mono: var(--xt-mono);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -107,7 +107,7 @@ html, body {
 }
 .tour-left { display: flex; align-items: flex-start; gap: 12px; }
 .tour-step-badge {
-  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  font-family: var(--xt-small); font-size: 0.7rem; font-weight: 700;
   padding: 4px 8px; border-radius: 6px; background: var(--accent); color: #111722; white-space: nowrap;
 }
 .tour-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
@@ -136,7 +136,7 @@ html, body {
 .verdict-cell.paradox { border-top-color: var(--accent-warm); background: var(--amber-bg); }
 .verdict-cell.info { border-top-color: var(--accent-blue); background: var(--blue-bg); }
 
-.v-kicker { display: block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 3px; }
+.v-kicker { display: block; font-family: var(--xt-small); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 3px; }
 .v-value { font-family: var(--font-display); font-size: 1.45rem; font-weight: 800; line-height: 1.08; margin-bottom: 3px; }
 .verdict-cell.pass .v-value { color: var(--accent-ok); }
 .verdict-cell.fail .v-value { color: var(--accent); }
@@ -152,8 +152,8 @@ html, body {
   gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--border-soft);
   background: var(--bg-panel); flex-wrap: wrap;
 }
-.plate-fig-label { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em; }
-.plate-fig-note { font-size: 0.7rem; color: var(--text-dim); }
+.plate-fig-label { font-family: var(--xt-small); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em; }
+.plate-fig-note { font-size: 0.7rem; color: var(--text-dim); font-family: var(--xt-small); }
 .plate-head-controls { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
 
 .mini-btn {
@@ -181,7 +181,7 @@ html, body {
 }
 .envelope-master.active-m { border-color: var(--accent-ok); background: var(--ok-bg); }
 .env-top-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
-.env-kicker { display: block; font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); }
+.env-kicker { display: block; font-family: var(--xt-small); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); }
 .env-callout { font-family: var(--font-mono); font-size: 0.94rem; font-weight: 700; color: var(--text-main); }
 .env-explain { font-size: 0.78rem; line-height: 1.46; color: var(--text-muted); }
 
@@ -200,7 +200,7 @@ html, body {
 }
 
 .control-section { padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--border-soft); }
-.section-label { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 8px; }
+.section-label { font-family: var(--xt-small); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 8px; }
 .preset-grid { display: flex; flex-wrap: wrap; gap: 6px; }
 .preset-btn {
   border: 1px solid var(--border); border-radius: 7px;
@@ -241,16 +241,16 @@ html, body {
   background: var(--bg-card-solid); padding: 24px 30px;
 }
 .sheet-folio-header {
-  display: flex; justify-content: space-between; font-family: var(--font-mono);
+  display: flex; justify-content: space-between; font-family: var(--xt-small);
   font-size: 0.68rem; font-weight: 600; letter-spacing: 0.07em; color: var(--text-dim);
   padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 18px;
   flex-wrap: wrap; gap: 8px;
 }
-.sheet-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; }
+.sheet-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; font-family: var(--xt-sub); }
 .rules-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
 .rule-col { border: 1px solid var(--border); border-top: 3px solid var(--accent-ok); border-radius: 9px; background: var(--bg-panel); padding: 14px 16px; }
 .rule-col.is-warn { border-top-color: var(--accent); }
-.rule-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 5px; margin-bottom: 10px; }
+.rule-badge { display: inline-block; font-family: var(--xt-small); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 5px; margin-bottom: 10px; }
 .rule-badge.good { background: var(--ok-bg); color: var(--accent-ok); }
 .rule-badge.warn { background: var(--warn-bg); color: var(--accent); }
 
@@ -258,11 +258,11 @@ html, body {
 .plate-list li { position: relative; padding-left: 14px; font-size: 0.81rem; line-height: 1.48; }
 .plate-list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
 .sheet-divider { height: 1px; background: var(--border); margin: 20px 0; }
-.plate-subhead { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+.plate-subhead { font-family: var(--xt-sub); font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
 
 .ref-matrix { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
 .ref-matrix th {
-  text-align: left; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  text-align: left; font-family: var(--xt-small); font-size: 0.66rem; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim);
   padding: 8px 10px 8px 0; border-bottom: 1.5px solid var(--text-main);
 }
